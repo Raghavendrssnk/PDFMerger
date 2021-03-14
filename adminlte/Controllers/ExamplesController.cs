@@ -15,7 +15,7 @@ namespace adminlte.Controllers
     {
         public ActionResult GeneratePDF()
         {
-            var Original = new PartialViewAsPdf("_InvoicePDF", ViewBag.Message = "Original")
+            var Original = new PartialViewAsPdf("_InvoicePDF", "Original")
             {
                 //FileName = "TestView.pdf",
                 PageSize = Size.A3,
@@ -24,7 +24,7 @@ namespace adminlte.Controllers
                 ContentDisposition = ContentDisposition.Inline
             };
 
-            var UserCopy1 = new PartialViewAsPdf("_InvoicePDF", ViewBag.Message = "UserCopy-1")
+            var UserCopy1 = new PartialViewAsPdf("_InvoicePDF", "UserCopy-1")
             {
                 //FileName = "TestView.pdf",
                 PageSize = Size.A3,
@@ -33,7 +33,7 @@ namespace adminlte.Controllers
                 ContentDisposition = ContentDisposition.Inline
             };
 
-            var UserCopy2 = new PartialViewAsPdf("_InvoicePDF", ViewBag.Message = "UserCopy-2")
+            var UserCopy2 = new PartialViewAsPdf("_InvoicePDF", "UserCopy-2")
             {
                 //FileName = "TestView.pdf",
                 PageSize = Size.A3,
