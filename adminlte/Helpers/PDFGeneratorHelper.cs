@@ -40,7 +40,6 @@ namespace adminlte.Helpers
 
         public FileStreamResult GetCombinedResult()
         {
-            byte[] mergedPdf = null;
             using (MemoryStream ms = new MemoryStream())
             {
                 using (Document document = new Document())
@@ -61,9 +60,7 @@ namespace adminlte.Helpers
                         }
                     }
                 }
-                mergedPdf = ms.ToArray();
-                // convert to donwloadable...
-
+             
                 System.Net.Mime.ContentDisposition cd = new System.Net.Mime.ContentDisposition
                 {
                     FileName = _fileName,
