@@ -18,7 +18,7 @@ namespace adminlte.Helpers
 
         IPDFGeneratorHelper GeneratePDFByteArray();
 
-        IPDFGeneratorHelper setFileName(string fileName);
+        IPDFGeneratorHelper SetFileName(string fileName);
 
         IPDFGeneratorHelper SetContentDisposition(bool isInline);
 

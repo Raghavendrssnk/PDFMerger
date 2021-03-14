@@ -26,7 +26,7 @@ namespace adminlte.Controllers
             return _iPDFGeneratorHelper.IsPartialView(true)
                                        .SetViewName("_InvoicePDF")
                                        .SetCopiesName(new List<string>() { "Original", "UserCopy-1", "UserCopy-2" })
-                                       .setFileName("TestLabe.pdf")
+                                       .SetFileName("TestLabe.pdf")
                                        .SetControlerContext(ControllerContext)
                                        .SetContentDisposition(true)
                                        .GeneratePDFByteArray()

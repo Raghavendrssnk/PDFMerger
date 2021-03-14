@@ -91,7 +91,7 @@ namespace adminlte.Helpers
             return this;
         }
 
-        public IPDFGeneratorHelper setFileName(string fileName)
+        public IPDFGeneratorHelper SetFileName(string fileName)
         {
             _fileName = fileName;
             return this;
