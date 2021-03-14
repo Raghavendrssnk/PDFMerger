@@ -24,16 +24,31 @@ namespace adminlte.Helpers
         public IPDFGeneratorHelper GeneratePDFByteArray()
         {
             _pdf = new List<byte[]>();
-            foreach (var item in _copiesNames)
+            if (_isPartialView)
             {
-                var viewObject = new PartialViewAsPdf(_viewName, item)
+                foreach (var item in _copiesNames)
                 {
-                    PageSize = Size.A3,
-                    PageOrientation = Orientation.Landscape,
-                    PageMargins = { Left = 0, Right = 0 },
-                };
-
-                _pdf.Add(viewObject.BuildFile(_context));
+                    var viewObject = new PartialViewAsPdf(_viewName, item)
+                    {
+                        PageSize = Size.A3,
+                        PageOrientation = Orientation.Landscape,
+                        PageMargins = { Left = 0, Right = 0 },
+                    };
+                    _pdf.Add(viewObject.BuildFile(_context));
+                }
+            }
+            else
+            {
+                foreach (var item in _copiesNames)
+                {
+                    var viewObject = new ViewAsPdf(_viewName, item)
+                    {
+                        PageSize = Size.A3,
+                        PageOrientation = Orientation.Landscape,
+                        PageMargins = { Left = 0, Right = 0 },
+                    };
+                    _pdf.Add(viewObject.BuildFile(_context));
+                }
             }
             return this;
         }
@@ -60,7 +75,7 @@ namespace adminlte.Helpers
                         }
                     }
                 }
-             
+
                 System.Net.Mime.ContentDisposition cd = new System.Net.Mime.ContentDisposition
                 {
                     FileName = _fileName,
