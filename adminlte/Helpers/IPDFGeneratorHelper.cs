@@ -20,7 +20,7 @@ namespace adminlte.Helpers
 
         IPDFGeneratorHelper setFileName(string fileName);
 
-        IPDFGeneratorHelper SetContentDisposition(bool isPartialView);
+        IPDFGeneratorHelper SetContentDisposition(bool isInline);
 
         FileStreamResult GetCombinedResult();
     }
