@@ -26,7 +26,7 @@ namespace adminlte.Helpers
             _pdf = new List<byte[]>();
             foreach (var item in _copiesNames)
             {
-                var viewObject = new PartialViewAsPdf("_InvoicePDF", "Original")
+                var viewObject = new PartialViewAsPdf("_InvoicePDF", item)
                 {
                     PageSize = Size.A3,
                     PageOrientation = Orientation.Landscape,
