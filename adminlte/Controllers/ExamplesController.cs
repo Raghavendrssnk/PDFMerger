@@ -15,7 +15,7 @@ namespace adminlte.Controllers
     {
         public ActionResult GeneratePDF()
         {
-            var Original = new PartialViewAsPdf("_InvoicePDF", ViewBag.Message="Original")
+            var Original = new PartialViewAsPdf("_InvoicePDF", ViewBag.Message = "Original")
             {
                 //FileName = "TestView.pdf",
                 PageSize = Size.A3,
@@ -24,7 +24,7 @@ namespace adminlte.Controllers
                 ContentDisposition = ContentDisposition.Inline
             };
 
-            var UserCopy1 = new PartialViewAsPdf("_InvoicePDF",  ViewBag.Message = "UserCopy-1")
+            var UserCopy1 = new PartialViewAsPdf("_InvoicePDF", ViewBag.Message = "UserCopy-1")
             {
                 //FileName = "TestView.pdf",
                 PageSize = Size.A3,
@@ -47,12 +47,12 @@ namespace adminlte.Controllers
             var userCopy2Bytes = UserCopy2.BuildFile(ControllerContext);
 
             var byteList = new List<byte[]>() { originalBytes, userCopy1Bytes, userCopy2Bytes };
-            var result = CombinePDFDocuments(byteList);
+            var result = CombinePDFDocuments(byteList, "labTest.pdf", true);
 
             return result;
         }
 
-        public FileStreamResult CombinePDFDocuments(List<byte[]> pdf)
+        public FileStreamResult CombinePDFDocuments(List<byte[]> pdf, string fileName, bool contentDisposition)
         {
             byte[] mergedPdf = null;
             using (MemoryStream ms = new MemoryStream())
@@ -78,9 +78,14 @@ namespace adminlte.Controllers
                 mergedPdf = ms.ToArray();
                 // convert to donwloadable...
 
+                System.Net.Mime.ContentDisposition cd = new System.Net.Mime.ContentDisposition
+                {
+                    FileName = fileName,
+                    Inline = contentDisposition  // false = prompt the user for downloading;  true = browser to try to show the file inline
+                };
 
                 Response.ContentType = "application/pdf";
-                Response.AddHeader("content-disposition", "attachment;filename=labtest.pdf");
+                Response.AddHeader("content-disposition", cd.ToString());
                 Response.Buffer = true;
                 Response.Clear();
                 Response.OutputStream.Write(ms.GetBuffer(), 0, ms.GetBuffer().Length);
